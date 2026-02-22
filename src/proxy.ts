@@ -1,0 +1,43 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { jwtVerify } from 'jose';
+
+export async function proxy(request: NextRequest) {
+    const token = request.cookies.get('token')?.value;
+
+    // Protected routes
+    const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
+    const isDashboardRoute = request.nextUrl.pathname.startsWith('/dashboard');
+
+    if (isAdminRoute || isDashboardRoute) {
+        if (!token) {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+
+        try {
+            if (!process.env.JWT_SECRET) {
+                throw new Error('JWT_SECRET is not defined');
+            }
+            const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+            const { payload } = await jwtVerify(token, secret);
+
+            // Check admin access
+            if (isAdminRoute && payload.role !== 'admin') {
+                return NextResponse.redirect(new URL('/', request.url));
+            }
+
+            // Check student/admin access for dashboard
+            if (isDashboardRoute && !['student', 'admin'].includes(payload.role as string)) {
+                return NextResponse.redirect(new URL('/', request.url));
+            }
+        } catch (error) {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+    }
+
+    return NextResponse.next();
+}
+
+export const config = {
+    matcher: ['/admin/:path*', '/dashboard/:path*'],
+};

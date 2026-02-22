@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-slide-in-left: slide-in-left 0.8s ease-out;
+  --animate-slide-in-up: slide-in-up 0.8s ease-out;
+  --animate-float-border: float-border 4s ease-in-out infinite;
+
+  @keyframes float-border {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-8px) scale(1.02); opacity: 0.9; }
+  }
+
+  @keyframes work-process-dance {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-6px) scale(1.03); }
+    50% { transform: translateY(0) scale(1); }
+    75% { transform: translateY(-4px) scale(1.02); }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* WebKit keyframes for mobile Safari */
+@-webkit-keyframes float-border {
+  0%, 100% { -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); opacity: 1; }
+  50% { -webkit-transform: translateY(-8px) scale(1.02); transform: translateY(-8px) scale(1.02); opacity: 0.9; }
+}
+@-webkit-keyframes work-process-dance {
+  0%, 100% { -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+  25% { -webkit-transform: translateY(-6px) scale(1.03); transform: translateY(-6px) scale(1.03); }
+  50% { -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+  75% { -webkit-transform: translateY(-4px) scale(1.02); transform: translateY(-4px) scale(1.02); }
+}
+
+@utility hex-mask {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+@layer utilities {
+  .animate-float-border {
+    -webkit-animation: float-border 4s ease-in-out infinite;
+    animation: float-border 4s ease-in-out infinite;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .animate-work-process-dance {
+    -webkit-animation: work-process-dance 3s ease-in-out infinite;
+    animation: work-process-dance 3s ease-in-out infinite;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white text-slate-900;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    min-height: 100dvh;
+    min-height: 100vh;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+}

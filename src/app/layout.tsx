@@ -1,0 +1,28 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'AfrESH Academy',
+  description: 'Quality education and practical skills',
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="overflow-x-hidden">
+      <body className={`${inter.className} antialiased overflow-x-hidden`}>{children}</body>
+    </html>
+  );
+}
