@@ -11,6 +11,9 @@ const IMG = {
 };
 const AV = (key: keyof typeof IMG) => IMG[key].replace("400&h=500", "150&h=150");
 
+// Light avatar for last card: small external URL only (no heavy assets for push)
+const AV_LIGHT = "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&q=80";
+
 export const TESTIMONIALS = [
     {
         id: 1,
@@ -33,7 +36,7 @@ export const TESTIMONIALS = [
         name: "Ngozi Eze",
         role: "Digital Marketing Pro",
         content: "Outstanding instructors and a supportive community. Best investment I've made in my education.",
-        avatar: AV("woman2"),
+        avatar: AV_LIGHT,
         rating: 5
     }
 ];

@@ -48,21 +48,21 @@ const Navbar: React.FC = () => {
     return (
         <nav className={`fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[95%] max-w-7xl z-50 transition-all duration-300 ${isTransparent ? 'bg-white/20' : 'bg-white/80'} backdrop-blur-xl rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 border border-white/30 shadow-xl`}>
             <div className="flex items-center justify-between relative">
-                <div className="flex items-center gap-2">
-                    <div className="bg-orange-500 p-1.5 rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-2 min-w-0">
+                    <div className="bg-orange-500 p-1.5 rounded-lg flex items-center justify-center shrink-0">
                         <span className="text-white text-xs font-black tracking-tighter">afr</span>
                     </div>
                     <Link
                         href="/"
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        className="cursor-pointer"
+                        className="cursor-pointer shrink-0"
                     >
-                        <span className={`text-xl sm:text-2xl font-bold transition-colors ${!isTransparent ? 'text-orange-500' : 'text-white'}`}>AfRESH</span>
+                        <span className={`text-xl sm:text-2xl font-bold transition-colors truncate ${!isTransparent ? 'text-orange-500' : 'text-white'}`}>AfRESH</span>
                     </Link>
                 </div>
 
-                {/* Desktop Nav - Centered */}
-                <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+                {/* Desktop Nav - only on large screens so iPad gets hamburger menu */}
+                <div className="hidden lg:flex items-center gap-6 xl:gap-8 absolute left-1/2 transform -translate-x-1/2">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {/* Right side - Auth & Contact */}
-                <div className="hidden md:flex items-center gap-4">
+                <div className="hidden lg:flex items-center gap-4">
                     {user ? (
                         <div className="flex items-center gap-4">
                             <Link href={user.role === 'admin' ? '/admin' : '/dashboard'} className="flex items-center gap-2 group">
@@ -117,7 +117,7 @@ const Navbar: React.FC = () => {
                             </Link>
                             <Link
                                 href="/contact"
-                                className="bg-[#483C5C] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-[#3D2F4A] transition-all"
+                                className="bg-[#483C5C] text-white px-5 xl:px-8 py-2.5 rounded-lg font-bold text-sm xl:text-base hover:bg-[#3D2F4A] transition-all whitespace-nowrap"
                             >
                                 Contact Us
                             </Link>
@@ -125,11 +125,11 @@ const Navbar: React.FC = () => {
                     )}
                 </div>
 
-                {/* Mobile Menu Button - 44px touch target */}
+                {/* Mobile/Tablet Menu Button - show on iPad and below (lg) */}
                 <button
                     type="button"
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-                    className={`md:hidden p-2.5 -m-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors ${!isTransparent ? 'text-orange-500 hover:bg-orange-500/10' : 'text-white hover:bg-white/10'}`}
+                    className={`lg:hidden p-2.5 -m-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors ${!isTransparent ? 'text-orange-500 hover:bg-orange-500/10' : 'text-white hover:bg-white/10'}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile Nav Menu - solid bg on small screens for readability */}
             {isMenuOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-xl py-4 flex flex-col md:hidden animate-fade-in-down border border-white/20 bg-[#483C5C] sm:bg-[#483C5C]/95 backdrop-blur-xl">
+                <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-xl py-4 flex flex-col lg:hidden animate-fade-in-down border border-white/20 bg-[#483C5C] sm:bg-[#483C5C]/95 backdrop-blur-xl">
                     <div className="px-4 space-y-1">
                         {navLinks.map((link) => (
                             <Link
