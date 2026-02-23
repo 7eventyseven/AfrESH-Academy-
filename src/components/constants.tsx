@@ -44,7 +44,7 @@ export const TESTIMONIALS = [
 export const TEAM = [
     {
         id: 1,
-        name: "Founder & CEO",
+        name: "Jethro Mark Daar",
         role: "CEO, AfrESH Academy",
         image: "/ceo.png",
         description: "CEO of Cbrilliance and Jebiz Innovations, and a software engineer with years of experience driving technology and education forward."
@@ -58,9 +58,9 @@ export const TEAM = [
     },
     {
         id: 3,
-        name: "Adaeze Nwosu",
+        name: "Christy Ishaku",
         role: "Design Director",
-        image: IMG.woman1,
+        image: "/christy-ishaku.jpeg",
         description: "Award-winning designer passionate about teaching creative problem solving."
     },
     {
